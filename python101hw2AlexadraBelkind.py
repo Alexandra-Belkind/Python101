@@ -31,9 +31,7 @@ Consider doing it with the in-line function sum, which facilitates a fast and re
 """
 
 def mean(vals):
-    """Return the mean of the values in vals, presupposed to be 
-    numeric (float, int, or long)."""
-
+    return sum(vals)/2
 
 """===================================================================
 2   [1.5 point]
@@ -53,8 +51,10 @@ To get the square root of a float x, using math.sqrt(x)
 """
 
 def sd(vals):
-    """Return the standard deviation of the values in vals, 
-    presupposed to be numeric (float, int, or long)."""
+    m = mean(vals)
+    N = len(vals)-1
+    for i in range(0,len(vals)):
+        return math.sqrt((sum((vals[i] - mean)*(vals[i] - mean)))/N)
 
 """===================================================================
 3   [1 point]
@@ -68,7 +68,7 @@ For details on calculating the z-score, see
 http://en.wikipedia.org/wiki/Z_score
 """
 
-"""def zscore(vals):
+def zscore(vals):
     This function is radical: it will replace vals with zscored vals.
     m = mean(vals)
     s = sd(vals)
@@ -77,11 +77,11 @@ http://en.wikipedia.org/wiki/Z_score
             vals[x] = (vals[x] - m) / s
         return vals
     else:
-        return 'n/a'"""
+        return 'n/a'
 
-def zscore(vals):
+#def zscore(vals):
     """Return the z-scored version of vals."""
-
+        #Sorry, I could not understad the task, because the answer is already there. -  AB
 """===================================================================
 4
 
@@ -145,7 +145,16 @@ def csv_parser(s):
     The output is a list of lists of subject data."""
 
     # Data is our output. It will be a list of lists.
-
+    data = []
+    with open(myspreadsheet, "row") as csvfile:
+        for lines in csvfile:
+            lines = lines.rowstrip()
+            columns = lines.split(",")
+            lines.pop(0)
+            for i in lines:
+                float(i) if '.' in i else int(i)
+            data.append(columns)
+    return data
     # Split csv into lines and store them in a list called 'lines'.
     
     # Remove the first element from lines, so that you have only the data lines left.
@@ -196,6 +205,8 @@ subjects in this data set, using your mean function from above.
 def mean_height(data):
     """Return the mean numerical value of column 1 in an list of lists.
     data is the output of csv_parser(myspreadsheet)"""
+    hight = columns[1]
+    return mean(hight)
 
 """===================================================================
 4.3  [2 points]
@@ -208,6 +219,16 @@ they occur in the data.
 def occupation_distribution(data):
     """Returns the list of occupations given in column 2 of data.
     data is the output of csv_parser(myspreadsheet)"""
+    
+    preparation = [Psycologist]
+    occupation = columns[2]
+    distr = 0
+    for i in occupation:
+        if i in preparation:
+            disrt = disrt + 1 + "Psycologist"
+            else:
+                dist = disrt + 1 + "Linguist"
+    
 
 """==================================================================="""
 
@@ -217,7 +238,15 @@ def proper_title_case(s):
     "the cat in the hat".title() ==> "The Cat In The Hat",
     but we want "The Cat in the Hat"    
     """
-    nocaps = ["the"] # This needs to be extended.
+    This function is radical: it will replace s with proper_title_cased s.
+    nocaps = ["the", "in"]
+    name = s
+    word = name.split(" ")
+    if word in nocaps:
+        pass
+    else:
+        word = word[0].upper()
+    
         
 ######################################################################
 
